@@ -1,0 +1,19 @@
+{
+  "name": "wrenfield-orders",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prices orders and refunds for the Wrenfield shop.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/main.ts",
+    "test": "node --test \"test/*.test.ts\"",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^7.0.2"
+  }
+}
