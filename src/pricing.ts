@@ -60,7 +60,7 @@ export function quote(items: readonly OrderItem[], code?: string): Quote {
   const applied = code === undefined || code.trim() === "" ? null : applyCode(code, subtotal);
   const discount = applied?.discount ?? 0;
   const discounted = subtotal - discount;
-  const shipping = discounted > FREE_SHIPPING_MINIMUM ? 0 : SHIPPING;
+  const shipping = discounted >= FREE_SHIPPING_MINIMUM ? 0 : SHIPPING;
   const tax = Math.round((discounted * TAX_PERCENT) / 100);
 
   const discounts = allocate(discount, lines.map((l) => l.subtotal));

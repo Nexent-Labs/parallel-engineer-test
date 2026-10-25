@@ -18,6 +18,13 @@ test("ships free well over the minimum", () => {
   assert.equal(q.total, 6400 + 512);
 });
 
+test("ships free at exactly the minimum", () => {
+  const q = quote([{ sku: "TEA-02", quantity: 4 }]);
+  assert.equal(q.subtotal, 5000);
+  assert.equal(q.shipping, 0);
+  assert.equal(q.total, 5000 + 400);
+});
+
 test("charges shipping just under the minimum", () => {
   const q = quote([{ sku: "CUP-04", quantity: 1 }, { sku: "KET-03", quantity: 1 }]);
   assert.equal(q.subtotal, 4999);
