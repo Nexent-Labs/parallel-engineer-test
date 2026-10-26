@@ -27,7 +27,7 @@ export function refund(paid: Quote, returned: readonly OrderItem[]): Refund {
     const line = paid.lines.find((l) => l.sku === sku);
     if (!line) throw new OrderError("not_in_order", `${sku} isn't in this order.`);
     if (quantity > line.quantity) throw new OrderError("bad_quantity", `Only ${line.quantity} of ${sku} were bought.`);
-    goods += line.unitPrice * quantity;
+    goods += Math.round(((line.subtotal - line.discount) * quantity) / line.quantity);
     tax += Math.round((line.tax * quantity) / line.quantity);
   }
 
