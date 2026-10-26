@@ -14,6 +14,15 @@ test("refunds a returned item with its tax", () => {
   assert.equal(r.total, 1350);
 });
 
+test("refunds a partial return at the discounted price", () => {
+  const paid = quote([{ sku: "MUG-01", quantity: 1 }, { sku: "TEA-02", quantity: 2 }], "WELCOME10");
+  const r = refund(paid, [{ sku: "TEA-02", quantity: 1 }]);
+  assert.equal(r.goods, 1125);
+  assert.equal(r.tax, 90);
+  assert.equal(r.shipping, 0);
+  assert.equal(r.total, 1215);
+});
+
 test("refunds shipping only when everything comes back", () => {
   const paid = order();
   const r = refund(paid, [{ sku: "MUG-01", quantity: 1 }, { sku: "TEA-02", quantity: 2 }]);
