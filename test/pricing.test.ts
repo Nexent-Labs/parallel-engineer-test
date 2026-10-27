@@ -64,3 +64,12 @@ test("merges repeated products and splits the discount and tax across lines", ()
   assert.equal(q.lines.reduce((sum, l) => sum + l.discount, 0), q.discount);
   assert.equal(q.lines.reduce((sum, l) => sum + l.tax, 0), q.tax);
 });
+
+test("takes 5% off a line of a dozen", () => {
+  const q = quote([{ sku: "MUG-01", quantity: 12 }]);
+  assert.equal(q.subtotal, 21600);
+  assert.equal(q.bulk, 1080);
+  assert.equal(q.shipping, 0);
+  assert.equal(q.tax, 1642);
+  assert.equal(q.total, 21600 - 1080 + 1642);
+});
